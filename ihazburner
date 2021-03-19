@@ -3,8 +3,10 @@
 #USAGE: Takes a list (one per line) of email domains in stdin, prints out the ones not present in public burner blocklists. Will also read lists from files passed as arguments
 list="${XDG_CACHE_HOME:-$HOME/.cache}/burner_email_blocklist.conf"
 
-#Check if our local copy of the list is up to date (considered out of date if the file hasn't changed for longer than 10 days)
-find "$list" -ctime 10 || {
+#Check if our local copy of the list is up to date (considered out of date if the file hasn't changed for longer than 10 days).
+#you would expect find to return a non-zero exit code when it can't find a file matching the conditions, but it doesn't.
+#i use test ([) to do that logic instead
+[ "$(find "$list" -ctime -10)" ] || {
 	curl "https://raw.githubusercontent.com/martenson/disposable-email-domains/master/disposable_email_blocklist.conf" "https://raw.githubusercontent.com/wesbos/burner-email-providers/master/emails.txt" > "$list"
 
 	curl "https://raw.githubusercontent.com/ivolo/disposable-email-domains/master/index.json" | 
@@ -24,5 +26,5 @@ while read line; do
 	LC_ALL=C grep --fixed-strings --line-regexp "$line" "$list" > /dev/null || echo "$line"
 
 
-	[ "$1" ] && shift
+	[ "$2" ] && shift
 done < "${1:-/dev/stdin}"
