@@ -1,4 +1,4 @@
-# Description
+# ihazburner
 
 Quickly find out if your [burner email address](https://en.wikipedia.org/wiki/Disposable_email_address) is likely to be banned for registration on most web-services. 
 
@@ -10,13 +10,13 @@ Takes a list of burner email addresses or domains (one per line) in [stdin](http
 
 ## Examples
 ```sh
-$ ~ > cat burners2try.txt
+$ cat burners2try.txt
 fnord@qux.net
 loremimpsum@foobar.xyz
 thud@waldo.me
 
 #stdin example
-ihazburner < burners2try.txt
+$ ihazburner < burners2try.txt
 #filepath as argument example
-ihazburner burners2try.txt burners3try.txt 2manyburners2try4me.txt ...
+$ ihazburner burners2try.txt burners3try.txt 2manyburners2try4me.txt ...
 ```
