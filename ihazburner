@@ -1,0 +1,28 @@
+#!/bin/sh
+#DESCRIPTION: Quickly find out if your burner email address is likely to be banned for registration on most websites.
+#USAGE: Takes a list (one per line) of email domains in stdin, prints out the ones not present in public burner blocklists. Will also read lists from files passed as arguments
+list="${XDG_CACHE_HOME:-$HOME/.cache}/burner_email_blocklist.conf"
+
+#Check if our local copy of the list is up to date (considered out of date if the file hasn't changed for longer than 10 days)
+find "$list" -ctime 10 || {
+	curl "https://raw.githubusercontent.com/martenson/disposable-email-domains/master/disposable_email_blocklist.conf" "https://raw.githubusercontent.com/wesbos/burner-email-providers/master/emails.txt" > "$list"
+
+	curl "https://raw.githubusercontent.com/ivolo/disposable-email-domains/master/index.json" | 
+		sed "1,1d; $d" | #delete first and last lines (irrelavant json)
+	tr -d "  \"[]," >> "$list" #tr completely de-jsonsifies the list before commiting it to our local list
+
+	#Clean up duplicates in the many lists we merged
+	sort --unique --output "$list" "$list"
+}
+
+>&2 echo "Unbanned email domains:"
+while read line; do
+	#strip everything but the domain
+	line=$(echo "$line" | cut -d'@' -f2-)
+
+	#Only print lines not present in the blocklist
+	LC_ALL=C grep --fixed-strings --line-regexp "$line" "$list" > /dev/null || echo "$line"
+
+
+	[ "$1" ] && shift
+done < "${1:-/dev/stdin}"
