@@ -18,7 +18,7 @@ thud@waldo.me
 #stdin example
 $ ihazburner < burners2try.txt
 ## or
-cat burners2try.txt | ihazburner
+$ cat burners2try.txt | ihazburner
 #filepath as argument example
 $ ihazburner burners2try.txt burners3try.txt 2manyburners2try4me.txt ...
 ```
