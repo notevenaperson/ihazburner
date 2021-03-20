@@ -21,10 +21,6 @@ list="${XDG_CACHE_HOME:-$HOME/.cache}/burner_email_blocklist.conf"
 while read line; do
 	#strip everything but the domain
 	line=$(echo "$line" | cut -d'@' -f2-)
-
 	#Only print lines not present in the blocklist
 	LC_ALL=C grep --fixed-strings --line-regexp "$line" "$list" > /dev/null || echo "$line"
-
-
-	[ "$2" ] && shift
-done < "${1:-/dev/stdin}"
+done < /dev/stdin
