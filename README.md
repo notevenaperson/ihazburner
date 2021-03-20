@@ -6,7 +6,7 @@ The habit of re-using email addresses is one of the ways contemporary web-servic
 
 Yes, I'm aware a lengthy description for an improvised script that just duct-tapes curl and grep for this very specific purpose is a little overkill.
 # Usage
-Takes a list of burner email addresses or domains (one per line) in [stdin](https://en.wikipedia.org/wiki/stdin), prints out the ones not present in common burner blocklists. Will also read filepaths passed as arguments for lists of burner email addresses or domains 
+Takes a list of burner email addresses or domains (one per line) in [stdin](https://en.wikipedia.org/wiki/stdin), prints out the ones not present in common burner blocklists.
 
 ## Examples
 ```sh
@@ -19,6 +19,4 @@ thud@waldo.me
 $ ihazburner < burners2try.txt
 ## or
 $ cat burners2try.txt | ihazburner
-#filepath as argument example
-$ ihazburner burners2try.txt burners3try.txt 2manyburners2try4me.txt ...
 ```
