@@ -1,6 +1,6 @@
 # ihazburner
 
-Quickly find out if your [burner email address](https://en.wikipedia.org/wiki/Disposable_email_address) is banned for account registration on most web-services. 
+Quickly find out if your [burner email address](https://en.wikipedia.org/wiki/Disposable_email_address) is banned for account registration on most web-services. A classic example of a burner email is https://guerrillamail.com, however nowadays, it's impossible to sign up to most websites with it.  
 
 The habit of re-using email addresses is one of the ways contemporary web-services spy on you. It seems disposable email addresses undermine their businesses so much they're willing to maintain huge blocklists of domains that offer temporary email addresses, not unlike privacy-minded individuals, who for diametrically opposed reasons obsessively maintain blocklists of trackers and ad server domains.
 
